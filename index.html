@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open When Letters</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #ff3366;
+            color: white;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h1 {
+            color: #ff4d79;
+            font-size: 24px;
+            animation: slideIn 1.5s ease-in-out;
+        }
+        .letters {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .letter {
+            background: #ff6699;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .letter:hover {
+            background: #ff3366;
+            transform: scale(1.05);
+        }
+        .message-section {
+            display: none;
+            background: white;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        footer {
+            background: #ff3366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            margin-top: auto;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Open When Letters 💌
+    </header>
+    <div class="container">
+        <p>Tap on a letter to reveal a special message from me to you Nammu! ❤️</p>
+        <div class="letters">
+            <div class="letter" onclick="openLetter('miss')">Open When You Miss Me</div>
+            <div class="letter" onclick="openLetter('sad')">Open When You're Sad</div>
+            <div class="letter" onclick="openLetter('happy')">Open When You're Happy</div>
+        </div>
+        <div id="miss" class="message-section">
+            <p id="miss-message"></p>
+        </div>
+        <div id="sad" class="message-section">
+            <p id="sad-message"></p>
+        </div>
+        <div id="happy" class="message-section">
+            <p id="happy-message"></p>
+        </div>
+    </div>
+    <footer>
+        Made with ❤️ for you | Always here, always loving you 💕
+    </footer>
+    <script>
+        const messages = {
+            
+        miss: [
+        "I know it's hard being apart, Namrata, but remember that no matter the distance, my love for you only grows stronger. I miss you too! ❤️",
+        "Nammu, even though we’re apart, you’re always in my heart. Soon we’ll be together again, and it will make it all worth it! 💕",
+        "Namrata, every second we're apart feels like forever. I can't wait to see you again! 💖",
+        "The distance may separate us, Nammu, but it can never take away the love I have for you. I’m counting down the days until we’re reunited! 💕",
+        "I miss you too, Namrata. But I want you to know that no matter how far apart we are, you are always with me, in my thoughts and in my heart. ❤️",
+        "Nammu, I know it’s tough, but we’re strong, and the time will fly by. Soon, I’ll be there to hold you, and we’ll make up for all the time apart! 💖",
+        "Namrata, you’re always in my heart, and I feel your love even when we’re apart. I’m here for you, and I’ll be with you before you know it. 💕",
+        "Though I miss you deeply, Nammu, I know that this distance is only temporary. Soon, we’ll be together again, stronger than ever! 💖",
+        "Namrata, I miss you more than words can express, but I take comfort in knowing that every day we’re apart brings us closer to being together again. 💕",
+        "I know you're missing me, Nammu, but just know that I’m always with you, in spirit and in love. I’ll be there before you know it. 💖",
+        "The time apart may feel long, Namrata, but think about how sweet the reunion will be. I’m counting the days until I can hold you again! 💕",
+        "Nammu, I miss you too, but I want you to remember that every moment we’re apart is just a small part of our beautiful journey together. 💖",
+        "I know it feels lonely right now, Namrata, but I promise you that soon enough, we’ll be back in each other’s arms. I miss you deeply, but I’m with you always. 💕",
+        "I miss you more than anything, Namrata, but every moment apart is just preparing us for the joy of our next reunion. Stay strong, my love. 💖",
+        "Namrata, missing you just makes me realize how much I love you. We’ll be together soon, and that thought keeps me going every day. 💕",
+        "Nammu, every moment I spend missing you is just another moment closer to being together. Stay strong, love, we’ll be reunited soon. 💖",
+        "Namrata, even though I’m not physically with you, my love for you is always present. We’re just a moment away from being reunited. 💕",
+        "I miss you, Nammu, but I find comfort in knowing that this time apart is temporary. We’re always connected, no matter the distance. 💖",
+        "Namrata, missing you makes me appreciate you even more. We’ll be together soon, and I can’t wait for that moment! 💕",
+        "I miss you too, Nammu. But every day that passes brings us closer to the joy of being together again. Stay strong, my love! 💖",
+        "I miss you so much, Namrata. Please remember that I’ll always be here for you, no matter the distance. 💖",
+        "Nammu, no matter how far apart we are, we’re still connected by our love. I miss you, but our bond is unbreakable! 💕",
+        "Namrata, my heart is yours, and even though we’re apart, my love for you grows stronger with every passing second. 💖",
+        "I know you miss me, Nammu, but we’re stronger than any distance. Let’s be patient, and we’ll be together before we know it. 💕",
+        "Namrata, I know you feel the emptiness when we’re apart, but remember that love knows no distance. Soon, we’ll be together again! 💖",
+        "I miss you more with each passing day, Nammu. But the thought of seeing you again keeps me going. 💕",
+        "Namrata, every day without you is a reminder of how much I need you. But soon, we’ll be together, and it will be worth it! 💖",
+        "Nammu, the days feel so long without you. I miss your presence, but I know our love is strong enough to carry us through. 💕",
+        "Namrata, missing you is the hardest part, but knowing that we’ll be together again makes it easier. 💖",
+        "I miss you too, Nammu. But I find peace in knowing that we’re building a beautiful future together, and soon, we’ll reunite. 💕",
+        "Namrata, my love for you is unwavering. We’ll be together soon, and every moment apart will have been worth it. 💖",
+        "Nammu, I miss you more than you know, but I know our reunion will be so sweet. Stay strong, my love. 💕",
+        "Namrata, missing you just makes me more eager to hold you close again. I love you, and I can’t wait to see you soon. 💖",
+        "Nammu, every second I’m apart from you feels like an eternity, but I know it’ll all be worth it when we’re reunited. 💕",
+        "I miss you, Namrata. But I also know that time apart is just a temporary phase. Our love will always keep us connected. 💖",
+        "Nammu, missing you only reminds me of how much I love you. We’ll be together soon, and it will make everything worth it. 💕",
+        "Namrata, even though I miss you so much, I know that this distance will make our reunion even more special. 💖",
+        "I miss you deeply, Nammu, but remember that our love is endless. Soon, we’ll be together again. 💕",
+        "Namrata, no matter how long we’re apart, I will always miss you, but our love will bring us back together. 💖",
+        "Nammu, you’re always with me, even when we’re apart. I miss you more than you can imagine. 💕",
+        "Namrata, missing you makes me realize how lucky I am to have you. Soon, we’ll be together again. 💖",
+        "I miss you, Nammu. But every moment apart is just another step closer to being together forever. 💕",
+        "Namrata, missing you is hard, but it also makes me love you even more. We’ll be reunited soon, and it will be magical! 💖",
+        "I miss you so much, Nammu. But remember, we’re just a heartbeat away from being together again. 💕",
+        "Namrata, I miss your voice, your smile, everything about you. But we’ll be together soon, and it will be worth the wait! 💖",
+        "Even when I miss you, Nammu, I know it’s just a temporary feeling. We’ll be back in each other’s arms soon! 💕",
+        "Namrata, my love for you is constant, even when we’re apart. Soon, I’ll be with you again, and it will feel like home. 💖",
+        "I miss you so much, Nammu. But remember that our love is unshakable, and nothing can separate us for long! 💕",
+        "Namrata, I miss you, but our love will carry us through. Soon, we’ll be reunited, and it will be worth every second of waiting. 💖"
+    ],
+    sad: [
+        "Stay strong, my love. I am always here for you, Namrata. 💖",
+        "Your smile is my sunshine, Nammu. Let me be your light in dark times! ☀️",
+        "Even in your worst moments, remember how much I love you, Namrata. You are amazing! 💕",
+        "Namrata, when life gets tough, just remember that I'm here to support you through everything. 💖",
+        "Nammu, no matter how sad you feel, I’ll always be there to lift you up. You’re my everything! 💕",
+        "When you feel down, Namrata, just think of me and know I’m sending you all my love. 💖",
+        "I know it’s hard right now, but we’ll get through it together, Nammu. You’re stronger than you know. 💕",
+        "Namrata, I'll stand by you no matter what. Don’t forget that I’m always here for you. 💖",
+        "Nammu, it hurts to see you sad. I’m sending you all my love to make things better. 💕",
+        "Even when you're feeling low, Namrata, my love for you will never fade. Stay strong, my heart. 💖",
+        "I’m here for you, Nammu, through the ups and downs. Let me be your rock during tough times. 💕",
+        "Namrata, even in your darkest moments, remember that I’m by your side, and we’ll get through this together. 💖",
+        "Nammu, I’ll always be here to support you, no matter how heavy your heart feels. 💕",
+        "Namrata, when you're feeling down, lean on me. I’m always here to listen, to support, and to love you. 💖",
+        "I know you’re sad right now, Nammu, but remember, you don’t have to face this alone. I’m with you. 💕",
+        "Namrata, even in your toughest moments, I know you are strong. And I’m here to remind you of that every day. 💖",
+        "Nammu, I’m sending you all the strength and love you need to get through this. You’re amazing! 💕",
+        "I know things are hard, Namrata, but we’ll get through them. You don’t have to go through it alone. 💖",
+        "Stay strong, Nammu. I believe in you, and I’ll always be by your side. 💕",
+        "Namrata, no matter what you’re going through, remember that you are loved and you are not alone. 💖",
+        "Nammu, even when things are difficult, know that you have my love and support to help you get through anything. 💕",
+        "Namrata, I see your strength even when you feel weak. You are a warrior, and I’m here to help you through this. 💖",
+        "Nammu, I’m here to help carry you through tough times. You’re never alone in this journey. 💕",
+        "Namrata, my love for you is unshakable, and no matter what, we’ll get through this together. 💖",
+        "Nammu, in the darkest times, remember that I’ll always be the light guiding you through. 💕",
+        "Namrata, when you feel overwhelmed, just know that I’m here, holding you in my heart. 💖",
+        "Stay strong, Nammu. You are stronger than you think, and I’m always here to help you through anything. 💕",
+        "Namrata, you are one of the strongest people I know. Don’t ever doubt that. You’ve got this, and I’m with you. 💖",
+        "Nammu, my heart hurts when you hurt, but I’ll always be here to help you find the light at the end of the tunnel. 💕",
+        "Namrata, we’re in this together. Lean on me when you need to, and I’ll always lift you up. 💖",
+        "Nammu, I can’t stand to see you sad, but I’ll do everything I can to make it better. You deserve all the happiness in the world. 💕",
+        "Namrata, you are never alone. I’m right here by your side, and we’ll get through anything together. 💖",
+        "Nammu, I know you’re feeling down, but remember, you are loved more than you can ever imagine. 💕",
+        "Namrata, I wish I could take away all your sadness, but just know I’m here to help you through it. 💖",
+        "Nammu, my love for you is unconditional, and I’ll never leave your side, no matter what. 💕",
+        "Namrata, you are so strong. Don’t forget that, even on the tough days. You’ve got this, and I’ve got you. 💖",
+        "Nammu, it’s okay to feel sad, but remember that I’m always here to listen, to support, and to love you. 💕",
+        "Namrata, when you're feeling down, just know that I’m here to remind you of how incredible you are. 💖",
+        "Nammu, no matter what’s going on, I believe in you, and we will face it together. 💕",
+        "Namrata, I’m sending you all my love and positive energy to help you through this tough time. 💖",
+        "Nammu, you are my strength, and even on your hardest days, I will be here to lift you up. 💕",
+        "Namrata, it’s okay to feel sad. But always remember that your happiness is my top priority, and I’m here to help you find it. 💖",
+        "Nammu, you’re stronger than you realize. Together, we can overcome anything life throws our way. 💕",
+        "Namrata, I’ll always be here to remind you of your strength, no matter how tough things get. 💖",
+        "Nammu, I believe in you, and I’m here to help you navigate through this sadness. We’ll get through this together. 💕",
+        "Namrata, my love for you is constant, even in the tough times. You’re not alone in this. 💖"
+    ],
+
+    happy: [
+        "Your happiness is my happiness, Namrata! Keep shining bright, my love. 😊",
+        "Seeing you happy, Nammu, is the best feeling in the world. Keep that beautiful smile on your face! ✨",
+        "Your joy is contagious, Namrata. I’m so happy whenever I see you smile! 🌟",
+        "Nammu, your happiness makes everything in life so much better. Stay happy, my love! 😊",
+        "Every moment spent seeing you happy is a moment well spent, Namrata. Keep smiling! 💖",
+        "Namrata, your smile lights up my world. Keep that happiness going, love! 😊",
+        "Seeing you so happy, Nammu, fills my heart with joy. I’m lucky to be part of your life! 💕",
+        "You make my world so much brighter, Namrata. Your happiness means everything to me. 🌟",
+        "Nammu, when you’re happy, I’m the happiest too. Keep spreading that happiness, my love! ✨",
+        "Every time I see your smile, Namrata, my heart feels at peace. Keep smiling! 😊",
+        "I love seeing you happy, Nammu! Your happiness is the most beautiful thing in the world. 💖",
+        "Your happiness means the world to me, Namrata. I’ll do anything to keep that smile on your face! 🌸",
+        "Nammu, I love it when you’re happy. Your joy is everything to me! 💖",
+        "Namrata, the best part of my day is seeing your beautiful smile. Keep that happiness alive! 😊",
+        "Every laugh, every smile, Nammu, fills me with so much love for you. Stay happy, my heart! 💖",
+        "Namrata, seeing you happy makes all my worries go away. Keep shining bright, my love! ✨",
+        "Nammu, your happiness is my greatest joy. I’ll always support you in everything that makes you happy! 💖",
+        "I’m so happy to see you happy, Namrata! Your positivity lights up the world around you. 🌟",
+        "Your happiness is my happiness, Nammu. Keep smiling, love, you deserve it! 😊",
+        "Namrata, I can’t help but smile when I see you so happy. You make life so much brighter! 💖",
+        "Nammu, you bring so much joy to my life. I can’t wait to see you continue shining! 🌟",
+        "Every time I see you happy, Namrata, my heart skips a beat. Keep that beautiful energy alive! 😊",
+        "You’re my sunshine, Nammu. Your happiness fills my heart with warmth. Keep shining! 🌞",
+        "Namrata, seeing you happy gives me so much peace. I’ll always do everything I can to keep that smile on your face! 💖",
+        "Nammu, your happiness is my happiness. Every moment spent with you is a blessing! 💕",
+        "Namrata, every time you smile, my heart does a little happy dance. Keep shining, love! ✨",
+        "Nammu, your joy makes my world brighter. I’m so proud of everything that makes you smile! 💖",
+        "Namrata, you deserve all the happiness in the world. Keep spreading that positive energy! 🌟",
+        "Your happiness is the best part of my day, Nammu. Keep shining like the star you are! ✨",
+        "Namrata, every time you’re happy, I feel so content. Keep that happiness alive, my love! 💖",
+        "I love seeing you happy, Nammu. You’re the reason my world feels so beautiful! 😊",
+        "Namrata, seeing you smile brings me so much peace. Keep being the amazing person you are! 💖",
+        "Your happiness is everything to me, Nammu. I’ll always be here to support your joy! 😊",
+        "Namrata, every time you smile, the world feels a little brighter. Keep spreading that light, my love! 🌟",
+        "Nammu, your happiness is contagious. I’m so grateful to be with someone who spreads so much joy! 💖",
+        "Namrata, you’re my happy place. Your joy brings so much love into my life. 😊",
+        "Nammu, nothing makes me happier than seeing you smile. Keep being the radiant soul you are! 💖",
+        "Namrata, you make everything better with your happiness. Stay bright, my love! ✨",
+        "Every moment with you is a happy moment, Nammu. I can’t wait to see you shine even brighter! 🌟",
+        "Namrata, you’re the source of so much joy in my life. Keep being the amazing person you are! 💖",
+        "Nammu, I’ll always cherish seeing you happy. Your joy makes my world complete! 🌟",
+        "Namrata, you’re my happiness. When you smile, the world feels right again. 😊",
+        "Nammu, your happiness gives me strength. I’m so grateful to share in your joy! 💖",
+        "Namrata, I love seeing you happy. Your smile lights up every room you enter! 💕",
+        "You make my heart so full, Nammu, every time you smile. Your happiness means everything to me! 💖",
+        "Namrata, your happiness makes my heart feel lighter. I’m so proud of you! 💕",
+        "Nammu, I can’t imagine my life without your happiness. Keep that beautiful energy flowing! 🌟",
+        "Namrata, your joy fills my heart with so much love. Keep shining, my beautiful one! 💖",
+        "Nammu, every time you laugh, my heart dances. You are the reason for all my joy! 😊",
+        "Namrata, when you're happy, I'm at my happiest. Keep spreading that love and joy! 💖",
+        "Nammu, you deserve all the happiness in the world. I’ll do everything I can to make sure you always have it! 💕",
+        "Namrata, I love seeing you so happy. Your smile is the most beautiful thing I’ve ever seen! 🌟",
+        "Nammu, your happiness is the most beautiful thing I’ve ever seen. Stay as joyful as you are, my love! 💖",
+        "Namrata, there’s nothing more precious than seeing you smile. Your happiness makes everything better. 💕",
+        "You bring so much joy to my life, Nammu. I’m lucky to be with someone as amazing as you! 💖"
+    ],
+
+        };
+        
+        function openLetter(type) {
+            closeAllLetters();
+            const randomMessage = messages[type][Math.floor(Math.random() * messages[type].length)];
+            document.getElementById(`${type}-message`).textContent = randomMessage;
+            document.getElementById(type).style.display = 'block';
+        }
+        
+        function closeAllLetters() {
+            document.querySelectorAll('.message-section').forEach(section => {
+                section.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
